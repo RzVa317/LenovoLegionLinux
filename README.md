@@ -124,7 +124,7 @@ You will need to install the following to download and build it. If there is an 
 
 **Ubuntu/Debian/Pop!_OS/Mint/elementary OS/Zorin**
 <details>
-<summary>View Commands</summary>
+<summary>Click to view</summary>
 
 ```bash
 sudo apt-get update
@@ -137,7 +137,7 @@ sudo apt-get install dkms openssl mokutil
 
 **RHEL/CentOS/RockyLinux/Fedora/AlmaLinux**
 <details>
-<summary>View Commands</summary>
+<summary>Click to view</summary>
 
 ```bash
 sudo dnf install -y kernel-headers kernel-devel dmidecode lm_sensors PyQt5 python3-yaml python3-pip python3-argcomplete
@@ -152,7 +152,7 @@ Alternatively, you might use `yum` instead of `dnf` and start with `sudo yum upd
 
 **openSUSE**
 <details>
-<summary>View Commands</summary>
+<summary>Click to view</summary>
 
 ```bash
 sudo zypper install make gcc kernel-devel kernel-default-devel git libopenssl-devel sensors dmidecode python3-qt5 python3-pip python3-PyYAML python3-argcomplete
@@ -165,7 +165,7 @@ sudo zypper install dkms openssl mokutil
 
 **Arch/Manjaro/EndeavourOS**
 <details>
-<summary>View Commands</summary>
+<summary>Click to view</summary>
 
 ```bash
 sudo pacman -S linux-headers base-devel lm_sensors git dmidecode python-pyqt5 python-yaml python-argcomplete
@@ -178,7 +178,7 @@ sudo pacman -S dkms openssl mokutil
 
 **Troubleshooting**
 <details>
-<summary></summary>
+<summary>Click to view</summary>
 
 - Got error `ERROR: Kernel configuration is invalid.`. Just reinstall kernel headers, e.g. in Debian:
 ```bash
