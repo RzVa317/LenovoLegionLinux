@@ -243,10 +243,11 @@ sudo make uninstall
 <details>
 <summary>Click to view</summary>
 
-> DKMS is a utility that eliminates the need to manually rebuild and reinstall the driver after every kernel update. DKMS will do the reinstallation automatically.
+**DKMS is a utility that eliminates the need to manually rebuild and reinstall the driver after every kernel update. DKMS will do the reinstallation automatically.**
 
-You must first install the package to with DKMS. See Requirements section. 
+You must first install the package to use DKMS. See Requirements section. 
 ```
+sudo mkdir /usr/src/LenovoLegionLinux-1.0.0
 sudo cp ./kernel_module/* /usr/src/LenovoLegionLinux-1.0.0 -r
 sudo dkms add -m LenovoLegionLinux -v 1.0.0
 sudo dkms build -m LenovoLegionLinux -v 1.0.0
