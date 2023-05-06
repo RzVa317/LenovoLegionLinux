@@ -29,6 +29,9 @@ It allows to control a few features like fan curve and power mode.
 :boom: **Starring shows that this is useful to me and the Linux community so hopefully a merge into the Kernel is possible.**
 
 ## :rocket: Features
+<details>
+<summary>View List</summary>
+
 <p align="center">
     <img height="300" style="float: center;" src="assets/fancurve_gui.jpg" alt="fancurve">
     <img height="300" style="float: center;" src="assets/psensor.png" alt="psensor">
@@ -57,6 +60,8 @@ It allows to control a few features like fan curve and power mode.
 - [x] toggle fn lock by software; use special function on F1-F12 keys without pressing Fn key
 - [x] enable or disable touchpad by software
 
+</details>
+
 ## :mega: Overview
 - it comes with a driver (kernel module) that implements the Linux standard interfaces (sysfs, debugfs, hwmon) 
 - using standard Linux interfaces makes it is compatible with the command line/file interface or standard GUI tools like psensor
@@ -65,9 +70,12 @@ It allows to control a few features like fan curve and power mode.
 
 
 ## :pushpin: Confirmed Compatible Models
+<details>
+<summary>Click to view</summary>
 
 # If you have a 2022 or 2023 model, please help testing the new features [here](https://github.com/johnfanv2/LenovoLegionLinux/issues/46). 
 # If you have a light in the lid (Y-logo) or at the IO-ports (all Legion 7), please help testing controlling it  [here](https://github.com/johnfanv2/LenovoLegionLinux/issues/54). 
+
 
 Other Lenovo Legion models from 2020 to 2023 probably also work. The following were confirmed. If you have a model with a BIOS version with the same leading letters, e.g. EFCN (like EFCN54WW) then it will probably work. If your model is not in the list or it does not work, please raise a issue.
 - Lenovo Legion 5 15IMH05, 15IMH05H (BIOS EFCN54WW): sensors, fan curve, power profile
@@ -102,6 +110,7 @@ Currently fan control is not working for the following models. Other features, p
     - [LenovoLegionToolkit](https://github.com/BartoszCichecki/LenovoLegionToolkit)
     - [LegionFanControl](https://www.legionfancontrol.com/) 
 
+</details>
 
 ## :bulb: Instructions
 Please do the following: 
@@ -114,6 +123,9 @@ Please do the following:
 You will need to install the following to download and build it. If there is an error of any package, find the alternative name in your distribution and install them.
 
 **Ubuntu/Debian/Pop!_OS/Mint/elementary OS/Zorin**
+<details>
+<summary>View Commands</summary>
+
 ```bash
 sudo apt-get update
 sudo apt-get install -y make gcc linux-headers-$(uname -r) build-essential git lm-sensors wget python3-pyqt5 python3-yaml python3-venv python3-pip python3-argcomplete
@@ -121,7 +133,12 @@ sudo apt-get install -y make gcc linux-headers-$(uname -r) build-essential git l
 sudo apt-get install dkms openssl mokutil
 ```
 
+</details>
+
 **RHEL/CentOS/RockyLinux/Fedora/AlmaLinux**
+<details>
+<summary>View Commands</summary>
+
 ```bash
 sudo dnf install -y kernel-headers kernel-devel dmidecode lm_sensors PyQt5 python3-yaml python3-pip python3-argcomplete
 sudo dnf groupinstall "Development Tools"
@@ -131,8 +148,12 @@ sudo dnf install dkms openssl mokutil
 ```
 Alternatively, you might use `yum` instead of `dnf` and start with `sudo yum update`. Installing "C Development Tools and Libraries" might not be needed depending of your distribution.
 
+</details>
 
 **openSUSE**
+<details>
+<summary>View Commands</summary>
+
 ```bash
 sudo zypper install make gcc kernel-devel kernel-default-devel git libopenssl-devel sensors dmidecode python3-qt5 python3-pip python3-PyYAML python3-argcomplete
 # Install the following for installation with DKMS
@@ -140,14 +161,20 @@ sudo zypper install dkms openssl mokutil
 ```
 *Note:* Check for the correct Header package.
 
+</details>
 
 **Arch/Manjaro/EndeavourOS**
+<details>
+<summary>View Commands</summary>
+
 ```bash
 sudo pacman -S linux-headers base-devel lm_sensors git dmidecode python-pyqt5 python-yaml python-argcomplete
 # Install the following for installation with DKMS
 sudo pacman -S dkms openssl mokutil
 ```
 *Note:* Check for the correct Header package.
+
+</details>
 
 Troubleshooting: 
 - Got error `ERROR: Kernel configuration is invalid.`. Just reinstall kernel headers, e.g. in Debian:
@@ -156,6 +183,9 @@ sudo apt install --reinstall linux-headers-$(uname -r)
 ```
 
 ### Build and Test Instruction
+<details>
+<summary></summary>
+
 ```bash
 git clone https://github.com/johnfanv2/LenovoLegionLinux.git
 cd LenovoLegionLinux/kernel_module
@@ -175,10 +205,13 @@ make[1]: *** /lib/modules/6.2.9-arch1-1/build: No such file or directory.  Stop.
 make[1]: Leaving directory '/home/user/LenovoLegionLinux/kernel_module'
 make: *** [Makefile:13: all] Error 2
 ```
-      
 
+</details>  
 
 ### Permanent Install Instruction
+<details>
+<summary>Click Here</summary>
+
 After successfully building and testing (see below), run from the folder `LenovoLegionLinux/kernel_module`
 ```bash
 make
@@ -187,15 +220,24 @@ sudo make install
 **You must recompile and reinstall it again with above commands after each kernel update, as usual for external kernel modules.**
 I want to get it merged into the mainline Linux kernel, so this is not needed anymore. So please star this repository :)
 
+</details>
 
 ### Uninstall Instruction
+<details>
+<summary>Click Here</summary>
+
 Go to the folder `LenovoLegionLinux/kernel_module`
 ```bash
 make
 sudo make uninstall
 ```
 
+</details>
+
 ### Installing via DKMS
+<details>
+<summary>View Commands</summary>
+
 > DKMS is a utility that eliminates the need to manually rebuild and reinstall the driver after every kernel update. DKMS will do the reinstallation automatically.
 
 You must first install the package to with DKMS. See Requirements section. 
@@ -214,6 +256,9 @@ sudo make dkms # Don't forget to run as root
 #### Secure boot
 If you want the driver to work with secure boot, then follow the steps described here
 https://github.com/dell/dkms#secure-boot.
+
+</details>
+
 ### Uninstalling via DKMS
 ```
 sudo dkms remove -m LenovoLegionLinux -v 1.0.0
@@ -231,6 +276,9 @@ Please note:
 - You can copy-and-paste the commands. Paste with `Ctrl+Shift+V` inside the terminal.
 
 ### Quick Test: Module is properly loaded
+<details>
+<summary>Click Here</summary>
+
 ```bash
 # After you have run from folder LenovoLegionLinux/kernel_module (for non DKMS)
 sudo make reloadmodule 
@@ -252,18 +300,22 @@ Unexpected result:
 [126675.496014] legion: probe of PNP0C09:00 failed with error -12
 ```
 
+</details>
+
 ### Quick Test: Reading Current Fancurve from Hardware
+<details>
+<summary>Click Here</summary>
+
 ```bash
 # Read the current fancurve and other debug output
 sudo cat /sys/kernel/debug/legion/fancurve
 ```
-
 Expected output:
 - EC Chip ID should be 8227
 - "fan curve points" size must NOT be 0
 - the table that shows the current fan curve must NOT be only zeros, the actual values might change
 - "fan curve current point id" and "EC Chip Version" might differ from the example
-    
+
 Example:
 ```text
 EC Chip ID: 8227 
@@ -297,14 +349,19 @@ ic_max_temp: if IC temperature above this value, go to next point
 
 All temperatures are in degree Celsius.
 ```
-**Note**: This is just a debug output. The fan curve is configured as usual using the standard `hwmon` interface.
 
+**Note**: This is just a debug output. The fan curve is configured as usual using the standard `hwmon` interface.
 
 Unexpected:
 - `/sys/kernel/debug/legion/fancurve: No such file or directory`: Kernel module was not loaded properly
 - `cat: /sys/kernel/debug/legion/fancurve: Permission denied` you have forgot sudo
 
+</details>
+
 ### Quick Test: Read Sensor Values from Hardware
+<details>
+<summary></summary>
+
 - display sensor values and check that it contains lines with "Fan 1", "Fan 2", "CPU Temperature", "GPU Temperature":
 ```bash
 # Run the command sensors
@@ -338,9 +395,13 @@ Expected output:
 Unexpected output:
 - `Command 'sensors' not found`: Install `sensors` from the package `lm-sensors`     
 - no entries for "Fan 1", "Fan 2" etc. are shown. The kernel module was not loaded properly. Redo first test.
-    
+
+</details>
 
 ### Quick Test: Change Current Fan Curve from Hardware with hwmon
+<details>
+<summary></summary>
+
 ```bash
 # Change the RPM of fans at the second and third point of the fan curve to 1500 rpm, 1600 rpm, 1700 rpm, 1800 rpm.
 # Get root
@@ -374,6 +435,7 @@ XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
 XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
 ```
 
+
 **If you want to reset your fan curve, just toggle with Ctrl+Q the power mode or restart and everything is gone.**
 
 Unexpected: 
@@ -381,6 +443,7 @@ Unexpected:
 - the values have not changed
 - there are different values
 
+</details>
 
 ### Quick Test: Set your custom fan curve
 Set a custom fan curve with the provided script. See `Creating and Setting your own Fan Curve` below.
@@ -406,6 +469,9 @@ psensor
 </p>
 
 ### Changing and Setting your own Fan Curve with the Python GUI
+<details>
+<summary></summary>
+
 Start the GUI as root
 ```bash
 # run from folder LenovoLegionLinux
@@ -428,8 +494,13 @@ sudo python/legion_linux/legion_linux/legion_gui.py
 Unexpected:
 - an error is displayed or everything is `0`: kernel module not loaded or installed (see above) or not compatible (do manual tests from above)
 - an value is not accepted when `Write to HW`: the value is out-of-range and was not accepted by hardware
-    
+
+</details>
+
 ### Changing and Setting your own Fan Curve with the Python CLI
+<details>
+<summary></summary>
+
 You can do the same as the GUI from a CLI program. It will access the same presets.
 ```bash
 # run from folder LenovoLegionLinux
@@ -456,7 +527,12 @@ subcommands:
                         Write fan curve from hardware to file
 ```
 
+</details>
+
 ### Creating and Setting your own Fan Curve with Script
+<details>
+<summary>View Commands</summary>
+
 Just run the script to set the fan curve. It is in the folder `LenovoLegionLinux`.
 ```bash
 # Go to folder LenovoLegionLinux and run it. It should output "Writing fancurve successful!" if it finishes successful
@@ -476,7 +552,12 @@ Note:
 - Currently, the hardware resets the fan curve randomly or if you change power mode, suspend, or restart. Just run the script again. 
 - You might want to create different scripts for different usages. Just copy it and adapt the values.
 
+</details>
+
 ### Change power mode from software
+<details>
+<summary>View Power Modes</summary>
+
 For this to work, you must install the kernel module permanently (see above). Alternatively, you can restart the the power daemon (`systemctl restart power-profiles-daemon.service` in Ubuntu) after reloading the kernel module (see above).
 
 #### Modify/Control with GUI
@@ -541,49 +622,79 @@ echo balanced-performance > /sys/firmware/acpi/platform_profile
 ```
 Unfortunately, the `power-profile-deamon` or `powerprofilesctl` currently do not support this mode.
 
+</details>
+
 ### Enable or disable the mini fan curve
+
+<details>
+<summary></summary>
+
 If the laptop stays cool for a longer time, it will enable the "mini fan curve", a special fan curve with only a few points. It will usually spin the fans. You can enable or disable that. If you want to use your configured fan curve in any case, disable it. The mini fan curve is not available on all models (you will see error for mini fan curve when running `cat /sys/kernel/debug/legion/fancurve`).
 
 With the GUI, the mini fan curve is enabled/disabled by checking/unchecking the box `Minifancurve if cold` and pressing `Apply to HW`.
 
+</details>
+
 ### Lock and Unlock the Fan Controller and Fan Speed
+<details>
+<summary></summary>
 
 You can lock the current fan speed. If it is locked, the fan speed will stays constant and does not react to temperature changes. You might want to lock the fan at a high speed during a game. I would not recommend keeping it locked all the time. If your fan controller gets locked accidentally, e.g. by Windows tools, you can unlock it. A locked fan controller might be the reason for a non-working fan control. If the fan controller is locked, the additional temperature sensors are not updated anymore and also stay constant.
 
 With the GUI, the fan controller is locked by checking the box `Lock fan controller` and pressing `Apply to HW`.
 
+</details>
+
 ### Set Speed to Maximum Fan Speed
+<details>
+<summary></summary>
 The fan can be set to maximum fan speed regardless of temperature. This is sometimes called extreme cooling mode or dust cleaning mode. Do not enable this for long periods of time, because it might degrade your fans faster.
 
 With the GUI, the current fan speed is set to the maximum possible value by checking `Set speed to maximum fan speed` and pressing `Apply to HW`.
 
 This is currently not available in many models. 
 
+</details>
 
 ### Set Battery Conservation Mode to Prolong Battery Life when AC is plugged in
+<details>
+<summary></summary>
 You can enable battery conservation mode. When conservation mode is enabled, the constant charging of the battery is disabled when the AC (charger) is plugged in. It will try to keep your battery state of charge at around 50%. This is said to prolong the battery life. 
 
 With the GUI, the battery conservation is enabled by checking the box `Battery conservation` (changes should apply immediately).
 
+</details>
+
 ### Toggle Fn lock to use special functions on F1-F12 keys without pressing Fn key
+<details>
+<summary></summary>
 You can lock the Fn keys. You can do it by pressing Fn+Esc. This should also toggle the light in the Esc key (if available in your model). 
 If enabled, the special functions, e.g. increase sound volume on F3, is triggered without pressing Fn.
 
 With the GUI, the Fn-lock is enabled/disabled by checking/unchecking the box `Fn Lock` (changes should apply immediately).
 
+</details>
+
 ### Enable/Disable Touch Pad
+<details>
+<summary></summary>
 You can enable or disable the touch pad. You can do it by pressing Fn+F10 (or similar). 
 
 With the GUI, the touch pad is enabled/disabled by checking/unchecking the box `Touch Pad Enabled` (changes should apply immediately).
 
+</details>
+
 ### Keyboard Backlight
+<details>
+<summary></summary>
 - 4 Zone RGB backlight: please use https://github.com/4JX/L5P-Keyboard-RGB
 - off/on white backlight or off/medium/bright white backlight: supported by this software but can be controlled by all programs for LED control in linux
+
+</details>
 
 ## Known Bugs
 Some bugs cannot be fixed due to the firmware in the hardware:
 - size of fan curve cannot be changed (size is 10 on performance mode, 9 otherwise) but you can practically disable points by setting the temperature limits to 127, as already done when writing to `auto_points_size`
-
 
 ## :clap: Credits
 
@@ -612,14 +723,26 @@ Also please tell me if it works or does not work on your laptop.
 ## :interrobang: Frequency Asked Questions
 
 ### What are the new temperatures?
+<details>
+<summary></summary>
 These are the temperatures measured and used by the embedded controller. Only they are relevant for the fan controller.
 They are provided by the new kernel module and otherwise not accessible because they are read from the embedded controller.
 
+</details>
+
 ### What are the new fan speed sensors?
+<details>
+<summary></summary>
 They report the fan speed in revolutions per minute (rpm). They are provided by the new kernel module and otherwise not accessible because they are read from the embedded controller.
 
+</details>
+
 ### What temperatures are used for controlling the fan speed?
+<details>
+<summary></summary>
 The CPU, GPU, and "IC" temperature is used. These are (usually) additional sensors that are different from the temperature sensors that are reported when you do not use the kernel model. In particular, the "IC" temperature limit might be set to a low value which results in almost-always running fans.
+
+</details>
 
 ### My CPU and GPU temperatures are low but the fan is still running?
 See above. In particular, the  "IC" temperature sensor.
@@ -629,6 +752,9 @@ I have no reason to believe that. As far as I know and observed, only the temper
 
 
 ### My fans do not spin up, never stop, or never change speed (after using other tools)?
+
+<details>
+<summary></summary>
 
 If they always have roughly constant speed, maybe you have locked the fan controller, often called locking fan speed.
 You can unlock/lock the fan speed controller in the GUI (see above). I would recommend not locking them. Doing 
@@ -643,15 +769,20 @@ If otherwise the fans never stop, you might have set a very low upper temperatur
 models also come with a low temperature limit even on quiet mode, so fans never really turn off. You can just increase the temperature
 limits for the lowest level.
 
+</details>
+
 ### The fans of the Legion Laptop are loud when idle?
 See above.
 
 ### The fans turn on when doing light work like browsing?
+<details>
+<summary></summary>
 Even when browsing there might be small bursts of work for the CPU. So it gets hot for a short time and the fans turn on. You can
 - change the fan curve, in particular increase temperature limit and increase acceleration time
 - disable CPU boost mode
 - also see above
 
+</details>
 
 ### The reported temperatures do not change or seem wrong?
 
@@ -662,9 +793,15 @@ See above.
 See above.
 
 ### After a BIOS update something, e.g. with the fans, does not work anymore?
+<details>
+<summary></summary>
 Maybe there was a problem during the BIOS update. Downgrade to a older version again. Then test it with the old version. Then do the BIOS upgrade again and check with the version.
 
+</details>
+
 ### How to do a BIOS upgrade or reset the embedded controller to fix a problem?
+<details>
+<summary></summary>
 The easiest way is to downgrade to a older version and then upgrade to the current version again. Also test it with the old version.
 You can also just try reset the embedded controller with:
 - shutdown laptop, unplug everything (charger, USB, ...)
@@ -672,8 +809,11 @@ You can also just try reset the embedded controller with:
 - after 60 seconds release power button
 - press power button shortly to turn laptop on
 
+</details>
 
 ### What does quiet, balanced, or performance mode do?
+<details>
+<summary></summary>
 You can switch the mode by pressing Fn + Q and it will change the mode in the firmware and the color of the LED, even without any driver support (= without Lenovo Legion Linux).
 
 Changing mode without Lenovo Legion Linux is purely implemented in hardware:
@@ -689,14 +829,26 @@ Changing mode with Lenovo Legion Linux:
 
 In Windows it is similar: Changing the power mode is reported to the system or tools like Vantage which change the power plan.
 
+</details>
+
 ### Should I use balanced mode or performance for gaming?
+<details>
+<summary></summary>
 The difference in usable performance (FPS) is minimal. Use performance mode to get the utmost highest performance, otherwise use balanced mode.
 
+</details>
+
 ### One fan runs at full speed all the time. What should I do?
+<details>
+<summary></summary>
 First check that the fan curve is set properly and this is not a misconfiguration. Then check if the temperatures used for fan control (see "new temperatures" above) have low values on idle. If just one fan is on full speed but the other one is controlled according to fan curve, then you
 should reset the BIOS and EC controller. 
 
+</details>
+
 ### What is "advanced thermal optimization" in the BIOS/UEFI?
+<details>
+<summary></summary>
 You can change the fan curve and minimal fan speed that are programmed into the hardware
 - off: turn off fan if cold enough
 - level 1: minimal fan speed level 1
@@ -705,12 +857,17 @@ You can change the fan curve and minimal fan speed that are programmed into the 
 
 also see: https://forums.lenovo.com/t5/Gaming-Laptops/Legion-7-Bios-What-is-advanced-thermal-optimization/m-p/5079357?clickid=xtRyKHRPaxyNR1ay4ywCuSBLUkA1nmX5DzV4UU0&irgwc=1&PID=121977&acid=ww%3Aaffiliate%3Abv0as6&cid=us%3Aaffiliate%3Acxsaam
 
+</details>
+
 ### I do not use GNOME (or Ubuntu). How do I get a nice applet for changing the power mode?
+<details>
+<summary></summary>
 The power mode can be changed with Fn+Q. Additionally, this driver makes it available to default tools like power-profiles-daemon. A graphical
  GNOME applet uses power-profiles-daemon to change the power mode by software. It is not provided by this tool, but is a standard tool already integrated into GNOME. For KDE there is the graphical tool powerdevil, which also uses power-profiles-daemon internally. If you just want to change it by software and do not need a GUI, you could use the commandline (see README).
 
 Maybe power-profiles-daemon or this applet need to be installed first. To test that it works in principal, you try changing with the CLI, see "Powermode -> Modify with CLI" in the README. If this works, than the rest is just a matter of the (KDE/GNOME/...) applet.
 
+</details>
 
 ### It almost works, but (some) temperature sensor/chaning point in fan control/ (some) fan speed is not working. What should I do?
 First, try to reset the embedded controller (see above) or do a BIOS update (even downgrade/upgrade possible) to reset everything.
