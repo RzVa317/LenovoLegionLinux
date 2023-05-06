@@ -71,7 +71,7 @@ It allows to control a few features like fan curve and power mode.
 
 ## :pushpin: Confirmed Compatible Models
 <details>
-<summary>Click to view</summary>
+<summary>Click to view compatible models</summary>
 
 # If you have a 2022 or 2023 model, please help testing the new features [here](https://github.com/johnfanv2/LenovoLegionLinux/issues/46). 
 # If you have a light in the lid (Y-logo) or at the IO-ports (all Legion 7), please help testing controlling it  [here](https://github.com/johnfanv2/LenovoLegionLinux/issues/54). 
@@ -176,15 +176,20 @@ sudo pacman -S dkms openssl mokutil
 
 </details>
 
-Troubleshooting: 
+**Troubleshooting**
+<details>
+<summary></summary>
+
 - Got error `ERROR: Kernel configuration is invalid.`. Just reinstall kernel headers, e.g. in Debian:
 ```bash
 sudo apt install --reinstall linux-headers-$(uname -r)
 ```
 
+</details>
+
 ### Build and Test Instruction
 <details>
-<summary></summary>
+<summary>Click to view</summary>
 
 ```bash
 git clone https://github.com/johnfanv2/LenovoLegionLinux.git
@@ -210,7 +215,7 @@ make: *** [Makefile:13: all] Error 2
 
 ### Permanent Install Instruction
 <details>
-<summary>Click Here</summary>
+<summary>Click to view</summary>
 
 After successfully building and testing (see below), run from the folder `LenovoLegionLinux/kernel_module`
 ```bash
@@ -224,7 +229,7 @@ I want to get it merged into the mainline Linux kernel, so this is not needed an
 
 ### Uninstall Instruction
 <details>
-<summary>Click Here</summary>
+<summary>Click to view</summary>
 
 Go to the folder `LenovoLegionLinux/kernel_module`
 ```bash
@@ -236,7 +241,7 @@ sudo make uninstall
 
 ### Installing via DKMS
 <details>
-<summary>View Commands</summary>
+<summary>Click to view</summary>
 
 > DKMS is a utility that eliminates the need to manually rebuild and reinstall the driver after every kernel update. DKMS will do the reinstallation automatically.
 
@@ -260,10 +265,15 @@ https://github.com/dell/dkms#secure-boot.
 </details>
 
 ### Uninstalling via DKMS
+<details>
+<summary>Click to view</summary>
+
 ```
 sudo dkms remove -m LenovoLegionLinux -v 1.0.0
 reboot
 ```
+
+</details>
 
 ### Permanently Patching the Kernel
 This is only useful for advanced users that build there own kernel. A automatically generated patch is provided on the 
@@ -277,7 +287,7 @@ Please note:
 
 ### Quick Test: Module is properly loaded
 <details>
-<summary>Click Here</summary>
+<summary>Click to view</summary>
 
 ```bash
 # After you have run from folder LenovoLegionLinux/kernel_module (for non DKMS)
@@ -304,7 +314,7 @@ Unexpected result:
 
 ### Quick Test: Reading Current Fancurve from Hardware
 <details>
-<summary>Click Here</summary>
+<summary>Click to view</summary>
 
 ```bash
 # Read the current fancurve and other debug output
@@ -360,7 +370,7 @@ Unexpected:
 
 ### Quick Test: Read Sensor Values from Hardware
 <details>
-<summary></summary>
+<summary>Click to view</summary>
 
 - display sensor values and check that it contains lines with "Fan 1", "Fan 2", "CPU Temperature", "GPU Temperature":
 ```bash
@@ -400,7 +410,7 @@ Unexpected output:
 
 ### Quick Test: Change Current Fan Curve from Hardware with hwmon
 <details>
-<summary></summary>
+<summary>Click to view</summary>
 
 ```bash
 # Change the RPM of fans at the second and third point of the fan curve to 1500 rpm, 1600 rpm, 1700 rpm, 1800 rpm.
@@ -460,6 +470,9 @@ Set a custom fan curve with the provided script. See `Creating and Setting your 
 **you have to install the kernel module permanently (see above), otherwise you must reload it manually after each restart**
 
 ### Temperature and Fan Monitoring
+<details>
+<summary>Click to view</summary>
+
 The temperatures and fan speeds should be displayed in any graphical tool that monitors them, e.g. psensor. You have to install it first before running:
 ```bash
 psensor
@@ -468,9 +481,11 @@ psensor
     <img height="450" style="float: center;" src="assets/psensor.png" alt="psensor">
 </p>
 
+</details>
+
 ### Changing and Setting your own Fan Curve with the Python GUI
 <details>
-<summary></summary>
+<summary>Click to view</summary>
 
 Start the GUI as root
 ```bash
@@ -499,7 +514,7 @@ Unexpected:
 
 ### Changing and Setting your own Fan Curve with the Python CLI
 <details>
-<summary></summary>
+<summary>Click to view</summary>
 
 You can do the same as the GUI from a CLI program. It will access the same presets.
 ```bash
@@ -531,7 +546,7 @@ subcommands:
 
 ### Creating and Setting your own Fan Curve with Script
 <details>
-<summary>View Commands</summary>
+<summary>Click to view</summary>
 
 Just run the script to set the fan curve. It is in the folder `LenovoLegionLinux`.
 ```bash
@@ -556,7 +571,7 @@ Note:
 
 ### Change power mode from software
 <details>
-<summary>View Power Modes</summary>
+<summary>Click to view</summary>
 
 For this to work, you must install the kernel module permanently (see above). Alternatively, you can restart the the power daemon (`systemctl restart power-profiles-daemon.service` in Ubuntu) after reloading the kernel module (see above).
 
@@ -627,7 +642,7 @@ Unfortunately, the `power-profile-deamon` or `powerprofilesctl` currently do not
 ### Enable or disable the mini fan curve
 
 <details>
-<summary></summary>
+<summary>Click to view</summary>
 
 If the laptop stays cool for a longer time, it will enable the "mini fan curve", a special fan curve with only a few points. It will usually spin the fans. You can enable or disable that. If you want to use your configured fan curve in any case, disable it. The mini fan curve is not available on all models (you will see error for mini fan curve when running `cat /sys/kernel/debug/legion/fancurve`).
 
@@ -637,7 +652,7 @@ With the GUI, the mini fan curve is enabled/disabled by checking/unchecking the 
 
 ### Lock and Unlock the Fan Controller and Fan Speed
 <details>
-<summary></summary>
+<summary>Click to view</summary>
 
 You can lock the current fan speed. If it is locked, the fan speed will stays constant and does not react to temperature changes. You might want to lock the fan at a high speed during a game. I would not recommend keeping it locked all the time. If your fan controller gets locked accidentally, e.g. by Windows tools, you can unlock it. A locked fan controller might be the reason for a non-working fan control. If the fan controller is locked, the additional temperature sensors are not updated anymore and also stay constant.
 
@@ -647,7 +662,7 @@ With the GUI, the fan controller is locked by checking the box `Lock fan control
 
 ### Set Speed to Maximum Fan Speed
 <details>
-<summary></summary>
+<summary>Click to view</summary>
 The fan can be set to maximum fan speed regardless of temperature. This is sometimes called extreme cooling mode or dust cleaning mode. Do not enable this for long periods of time, because it might degrade your fans faster.
 
 With the GUI, the current fan speed is set to the maximum possible value by checking `Set speed to maximum fan speed` and pressing `Apply to HW`.
@@ -658,7 +673,7 @@ This is currently not available in many models.
 
 ### Set Battery Conservation Mode to Prolong Battery Life when AC is plugged in
 <details>
-<summary></summary>
+<summary>Click to view</summary>
 You can enable battery conservation mode. When conservation mode is enabled, the constant charging of the battery is disabled when the AC (charger) is plugged in. It will try to keep your battery state of charge at around 50%. This is said to prolong the battery life. 
 
 With the GUI, the battery conservation is enabled by checking the box `Battery conservation` (changes should apply immediately).
@@ -667,7 +682,7 @@ With the GUI, the battery conservation is enabled by checking the box `Battery c
 
 ### Toggle Fn lock to use special functions on F1-F12 keys without pressing Fn key
 <details>
-<summary></summary>
+<summary>Click to view</summary>
 You can lock the Fn keys. You can do it by pressing Fn+Esc. This should also toggle the light in the Esc key (if available in your model). 
 If enabled, the special functions, e.g. increase sound volume on F3, is triggered without pressing Fn.
 
@@ -677,7 +692,7 @@ With the GUI, the Fn-lock is enabled/disabled by checking/unchecking the box `Fn
 
 ### Enable/Disable Touch Pad
 <details>
-<summary></summary>
+<summary>Click to view</summary>
 You can enable or disable the touch pad. You can do it by pressing Fn+F10 (or similar). 
 
 With the GUI, the touch pad is enabled/disabled by checking/unchecking the box `Touch Pad Enabled` (changes should apply immediately).
@@ -686,7 +701,7 @@ With the GUI, the touch pad is enabled/disabled by checking/unchecking the box `
 
 ### Keyboard Backlight
 <details>
-<summary></summary>
+<summary>Click to view</summary>
 - 4 Zone RGB backlight: please use https://github.com/4JX/L5P-Keyboard-RGB
 - off/on white backlight or off/medium/bright white backlight: supported by this software but can be controlled by all programs for LED control in linux
 
@@ -724,7 +739,7 @@ Also please tell me if it works or does not work on your laptop.
 
 ### What are the new temperatures?
 <details>
-<summary></summary>
+<summary>Click to view</summary>
 These are the temperatures measured and used by the embedded controller. Only they are relevant for the fan controller.
 They are provided by the new kernel module and otherwise not accessible because they are read from the embedded controller.
 
@@ -732,14 +747,14 @@ They are provided by the new kernel module and otherwise not accessible because 
 
 ### What are the new fan speed sensors?
 <details>
-<summary></summary>
+<summary>Click to view</summary>
 They report the fan speed in revolutions per minute (rpm). They are provided by the new kernel module and otherwise not accessible because they are read from the embedded controller.
 
 </details>
 
 ### What temperatures are used for controlling the fan speed?
 <details>
-<summary></summary>
+<summary>Click to view</summary>
 The CPU, GPU, and "IC" temperature is used. These are (usually) additional sensors that are different from the temperature sensors that are reported when you do not use the kernel model. In particular, the "IC" temperature limit might be set to a low value which results in almost-always running fans.
 
 </details>
@@ -754,7 +769,7 @@ I have no reason to believe that. As far as I know and observed, only the temper
 ### My fans do not spin up, never stop, or never change speed (after using other tools)?
 
 <details>
-<summary></summary>
+<summary>Click to view</summary>
 
 If they always have roughly constant speed, maybe you have locked the fan controller, often called locking fan speed.
 You can unlock/lock the fan speed controller in the GUI (see above). I would recommend not locking them. Doing 
@@ -776,7 +791,7 @@ See above.
 
 ### The fans turn on when doing light work like browsing?
 <details>
-<summary></summary>
+<summary>Click to view</summary>
 Even when browsing there might be small bursts of work for the CPU. So it gets hot for a short time and the fans turn on. You can
 - change the fan curve, in particular increase temperature limit and increase acceleration time
 - disable CPU boost mode
@@ -794,14 +809,14 @@ See above.
 
 ### After a BIOS update something, e.g. with the fans, does not work anymore?
 <details>
-<summary></summary>
+<summary>Click to view</summary>
 Maybe there was a problem during the BIOS update. Downgrade to a older version again. Then test it with the old version. Then do the BIOS upgrade again and check with the version.
 
 </details>
 
 ### How to do a BIOS upgrade or reset the embedded controller to fix a problem?
 <details>
-<summary></summary>
+<summary>Click to view</summary>
 The easiest way is to downgrade to a older version and then upgrade to the current version again. Also test it with the old version.
 You can also just try reset the embedded controller with:
 - shutdown laptop, unplug everything (charger, USB, ...)
@@ -813,7 +828,7 @@ You can also just try reset the embedded controller with:
 
 ### What does quiet, balanced, or performance mode do?
 <details>
-<summary></summary>
+<summary>Click to view</summary>
 You can switch the mode by pressing Fn + Q and it will change the mode in the firmware and the color of the LED, even without any driver support (= without Lenovo Legion Linux).
 
 Changing mode without Lenovo Legion Linux is purely implemented in hardware:
@@ -833,14 +848,14 @@ In Windows it is similar: Changing the power mode is reported to the system or t
 
 ### Should I use balanced mode or performance for gaming?
 <details>
-<summary></summary>
+<summary>Click to view</summary>
 The difference in usable performance (FPS) is minimal. Use performance mode to get the utmost highest performance, otherwise use balanced mode.
 
 </details>
 
 ### One fan runs at full speed all the time. What should I do?
 <details>
-<summary></summary>
+<summary>Click to view</summary>
 First check that the fan curve is set properly and this is not a misconfiguration. Then check if the temperatures used for fan control (see "new temperatures" above) have low values on idle. If just one fan is on full speed but the other one is controlled according to fan curve, then you
 should reset the BIOS and EC controller. 
 
@@ -848,7 +863,7 @@ should reset the BIOS and EC controller.
 
 ### What is "advanced thermal optimization" in the BIOS/UEFI?
 <details>
-<summary></summary>
+<summary>Click to view</summary>
 You can change the fan curve and minimal fan speed that are programmed into the hardware
 - off: turn off fan if cold enough
 - level 1: minimal fan speed level 1
@@ -861,7 +876,7 @@ also see: https://forums.lenovo.com/t5/Gaming-Laptops/Legion-7-Bios-What-is-adva
 
 ### I do not use GNOME (or Ubuntu). How do I get a nice applet for changing the power mode?
 <details>
-<summary></summary>
+<summary>Click to view</summary>
 The power mode can be changed with Fn+Q. Additionally, this driver makes it available to default tools like power-profiles-daemon. A graphical
  GNOME applet uses power-profiles-daemon to change the power mode by software. It is not provided by this tool, but is a standard tool already integrated into GNOME. For KDE there is the graphical tool powerdevil, which also uses power-profiles-daemon internally. If you just want to change it by software and do not need a GUI, you could use the commandline (see README).
 
@@ -877,11 +892,15 @@ First, try to reset the embedded controller (see above) or do a BIOS update (eve
 Please recompile/reinstall, see Permanent Install Instructions. 
 
 ### My screen is dimmed after a time of inactivity even if I disabled that in Ubuntu. How to fix that?
+<details>
+<summary>Click to view</summary>
+
 ```bash
 gsettings set org.gnome.settings-daemon.plugins.power idle-brightness 100
 ```
 see https://www.reddit.com/r/linuxquestions/comments/utle2w/ubuntu_2204_is_there_a_way_to_disable_screen/
 
+</details>
 
 ## :question: Open Questions
 - What exactly is the third temperature? Currently, it is currently called IC Temperature.
