@@ -122,6 +122,10 @@ Please do the following:
 ### Requirements
 You will need to install the following to download and build it. If there is an error of any package, find the alternative name in your distribution and install them.
 
+
+<details>
+<summary>View Distro Requirements</summary>
+
 **Ubuntu/Debian/Pop!_OS/Mint/elementary OS/Zorin**
 <details>
 <summary>Click to view</summary>
@@ -184,6 +188,8 @@ sudo pacman -S dkms openssl mokutil
 ```bash
 sudo apt install --reinstall linux-headers-$(uname -r)
 ```
+
+</details>
 
 </details>
 
