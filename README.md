@@ -1,6 +1,6 @@
 <img height="50" align="left" src="assets/headerlogo.png" alt="HeaderLogo">
 
-# Lenovo Legion Linux
+# Lenovo Legion Linux Support
 
 [![Build](https://github.com/johnfanv2/LenovoLegionLinux/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/johnfanv2/LenovoLegionLinux/actions/workflows/build.yml)
 [![Join Discord](https://img.shields.io/discord/761178912230473768?label=Legion%20Series%20Discord)](https://discord.com/invite/legionseries)
@@ -267,7 +267,7 @@ sudo make dkms # Don't forget to run as root
 
 #### Secure boot
 If you want the driver to work with secure boot, then follow the steps described here
-https://github.com/dell/dkms#secure-boot.
+https://github.com/dell/dkms#secure-boot or here https://wiki.archlinux.org/title/User:Krin/Secure_Boot,_full_disk_encryption,_and_TPM2_unlocking_install#Secure_boot. Note that this is a little more advanced. For initial testing, just load the module as described in the steps above or disable secure boot.
 
 </details>
 
@@ -438,7 +438,7 @@ echo 1800 > /sys/module/legion_laptop/drivers/platform:legion/PNP0C09:00/hwmon/h
 cat /sys/kernel/debug/legion/fancurve
 ```
 Expected: 
-- the controller might have loaded default values if you pressed Ctr+Q(or FN+Q on certain devices) to change the power mode or waited too long; then try again
+- the controller might have loaded default values if you pressed Ctrl+Q(or FN+Q on certain devices) to change the power mode or waited too long; then try again
 - The entries in the fan curve are set to their values. The other values are not relevant (marked with XXXX)
 ```
 rpm1|rpm2|acceleration|deceleration|cpu_min_temp|cpu_max_temp|gpu_min_temp|gpu_max_temp|ic_min_temp|ic_max_temp
@@ -452,8 +452,7 @@ XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
 XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX
 ```
 
-
-**If you want to reset your fan curve, just toggle with Ctrl+Q the power mode or restart and everything is gone.**
+**If you want to reset your fan curve, just toggle with Ctrl+Q or Fn+Q the power mode or restart and everything is gone.**
 
 Unexpected: 
 - `file not found`: please report your problem as a Github Issue
@@ -569,7 +568,7 @@ Unexpected output:
 - script does not end with "fancurve set": maybe path to hwmon changed; Please report this
 
 Note: 
-- **If you want to reset your fan curve, just toggle with Ctrl+Q the power mode or restart and everything is gone.**
+- **If you want to reset your fan curve, just toggle with Ctrl+Q or Fn+Q the power mode or restart and everything is gone.**
 - Currently, there is no GUI available. 
 - Currently, the hardware resets the fan curve randomly or if you change power mode, suspend, or restart. Just run the script again. 
 - You might want to create different scripts for different usages. Just copy it and adapt the values.
